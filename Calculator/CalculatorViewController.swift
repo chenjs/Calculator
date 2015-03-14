@@ -17,6 +17,8 @@ class CalculatorViewController: UIViewController
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         
+        println("digit = \(digit)")
+        
         if userIsInTheMiddleOfTypingANumber {
             display.text = display.text! + digit
         } else {
