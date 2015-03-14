@@ -1,0 +1,39 @@
+
+
+一、怎样给没有git管理的Projects增加git版本管理
+
+*** 在Xcode中无法完成，所以以下操作需要在Terminal中来操作
+
+以项目TestMe为例说明：
+
+1. 打开Termial，cd  父目录/TestMe
+2. 初始化git项目
+    git init
+3. 添加文件
+    git add .
+4. 初始提交
+    git commit -m "Initial Commit"
+5. 查看git状态
+    git status
+
+
+
+二、怎样把本地的git管理的Projects增加到GitHub
+1. SSH设置
+    cd ~/.ssh
+    ls -l
+    检查公钥文件是否存在（id_rsa.pub or id_dsa.pub）
+2. 如果没有公钥文件，先生成公钥文件
+    ssh-keygen -t rsa -C "YOUR EMAIL"
+3. 增加ssh-key到GitHub
+    在GitHub新增一个SSH-Key，key字段的内容为id_rsa.pub文件的全部内容
+4. 在GitHub上新建一个repository，命名未TestMe
+5. 拷贝TestMe仓库的ssh地址（如：git@github.com:chenjs/TestMe.git）
+5. 在Xcode中打开TestMe项目
+   菜单Source Control -> master -> Configure TesMe, 新增一个Remote仓库地址
+   其中，name：TestMe  address：第5步地址（git@github.com:chenjs/Smashtag.git）
+6. Push到GitHub
+    菜单Source Control -> Push
+
+
+参考资料：《iOS 7 By Tutorials》第12、13章
