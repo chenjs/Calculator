@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C06374E11AB434070070CF78 /* Step of git.txt in Resources */ = {isa = PBXBuildFile; fileRef = C06374E01AB434070070CF78 /* Step of git.txt */; };
+		C0764E801AB5C93600B6C776 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0764E7F1AB5C93600B6C776 /* CalculatorBrain.swift */; };
 		C0EA4C181AB41ED700115D19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EA4C171AB41ED700115D19 /* AppDelegate.swift */; };
 		C0EA4C1A1AB41ED700115D19 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EA4C191AB41ED700115D19 /* CalculatorViewController.swift */; };
 		C0EA4C1D1AB41ED700115D19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0EA4C1B1AB41ED700115D19 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		C06374E01AB434070070CF78 /* Step of git.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Step of git.txt"; sourceTree = "<group>"; };
+		C0764E7F1AB5C93600B6C776 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		C0EA4C121AB41ED700115D19 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0EA4C161AB41ED700115D19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0EA4C171AB41ED700115D19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				C0EA4C191AB41ED700115D19 /* CalculatorViewController.swift */,
+				C0764E7F1AB5C93600B6C776 /* CalculatorBrain.swift */,
 				C0EA4C1B1AB41ED700115D19 /* Main.storyboard */,
 				C06374DF1AB433AE0070CF78 /* Doc */,
 				C0EA4C151AB41ED700115D19 /* Supporting Files */,
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0764E801AB5C93600B6C776 /* CalculatorBrain.swift in Sources */,
 				C0EA4C1A1AB41ED700115D19 /* CalculatorViewController.swift in Sources */,
 				C0EA4C181AB41ED700115D19 /* AppDelegate.swift in Sources */,
 			);

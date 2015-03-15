@@ -15,6 +15,8 @@ class CalculatorViewController: UIViewController
     
     var userIsInTheMiddleOfTypingANumber = false
     
+    var brain = CalculatorBrain()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         logLabel.text = ""
@@ -23,15 +25,12 @@ class CalculatorViewController: UIViewController
     @IBAction func clearAll(sender: AnyObject) {
         displayValue = 0
         logLabel.text = ""
-        operandStack.removeAll()
+        brain.reset()
         userIsInTheMiddleOfTypingANumber = false
     }
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
-        
-        println("digit = \(digit)")
-        addLogMessage(digit)
         
         if userIsInTheMiddleOfTypingANumber {
             if digit == "." &&  display.text!.rangeOfString(".") != nil {
@@ -50,33 +49,14 @@ class CalculatorViewController: UIViewController
             enter()
         }
         
-        let operation = sender.currentTitle!
-        switch operation {
-        case "×": performOperation { $0 * $1 }
-        case "÷": performOperation { $1 / $0 }
-        case "+": performOperation { $0 + $1 }
-        case "−": performOperation { $1 - $0 }
-        case "√": performOperation { sqrt($0) }
-        case "sin": performOperation { sin($0) }
-        case "cos": performOperation { cos($0) }
-        case "∏": performOperation(M_PI)
-        default:break
-        }
-        
-        addLogMessage(operation)
-    }
-    
-    func performOperation(operation: (Double, Double) -> Double) {
-        if operandStack.count >= 2 {
-            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            enter()
-        }
-    }
-    
-    func performOperation(operation: Double -> Double) {
-        if operandStack.count >= 1 {
-            displayValue = operation(operandStack.removeLast())
-            enter()
+        if let operation = sender.currentTitle {
+            if let result = brain.performOperation(operation) {
+                displayValue = result
+            } else {
+                displayValue = 0
+            }
+            
+            addLogMessage(operation)
         }
     }
     
@@ -85,12 +65,16 @@ class CalculatorViewController: UIViewController
         enter()
     }
     
-    var operandStack = Array<Double>()
-    
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
-        operandStack.append(displayValue)
-        println("operandStack = \(operandStack)")
+        
+        addLogMessage("\(displayValue)")
+        
+        if let result = brain.pushOperand(displayValue) {
+            displayValue = result
+        } else {
+            displayValue = 0
+        }
     }
     
     var displayValue: Double {
