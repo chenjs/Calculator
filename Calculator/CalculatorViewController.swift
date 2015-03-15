@@ -11,16 +11,34 @@ import UIKit
 class CalculatorViewController: UIViewController
 {
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var logLabel: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        logLabel.text = ""
+    }
 
+    @IBAction func clearAll(sender: AnyObject) {
+        displayValue = 0
+        logLabel.text = ""
+        operandStack.removeAll()
+        userIsInTheMiddleOfTypingANumber = false
+    }
+    
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         
         println("digit = \(digit)")
+        addLogMessage(digit)
         
         if userIsInTheMiddleOfTypingANumber {
-            display.text = display.text! + digit
+            if digit == "." &&  display.text!.rangeOfString(".") != nil {
+                println("Invalid .")
+            } else {
+                display.text = display.text! + digit
+            }
         } else {
             display.text = digit
             userIsInTheMiddleOfTypingANumber = true
@@ -39,9 +57,13 @@ class CalculatorViewController: UIViewController
         case "+": performOperation { $0 + $1 }
         case "−": performOperation { $1 - $0 }
         case "√": performOperation { sqrt($0) }
+        case "sin": performOperation { sin($0) }
+        case "cos": performOperation { cos($0) }
+        case "∏": performOperation(M_PI)
         default:break
         }
         
+        addLogMessage(operation)
     }
     
     func performOperation(operation: (Double, Double) -> Double) {
@@ -56,6 +78,11 @@ class CalculatorViewController: UIViewController
             displayValue = operation(operandStack.removeLast())
             enter()
         }
+    }
+    
+    func performOperation(operand: Double) {
+        displayValue = operand
+        enter()
     }
     
     var operandStack = Array<Double>()
@@ -73,6 +100,10 @@ class CalculatorViewController: UIViewController
         set {
             display.text = "\(newValue)"
         }
+    }
+    
+    func addLogMessage(msg: String) {
+        logLabel.text = logLabel.text! + msg + " "
     }
 }
 
